@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Docker Multi-Tier Todo App</title>
+    <style>
+        body{
+            font-family: Arial;
+            background:#f4f4f4;
+            margin:40px;
+        }
+        h1{
+            color:#2196F3;
+        }
+        ul{
+            background:white;
+            padding:20px;
+            border-radius:8px;
+            width:400px;
+        }
+        li{
+            margin:10px 0;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>Docker Multi-Tier Todo App</h1>
+
+<h2>Todo List</h2>
+
+<ul id="todos"></ul>
+
+<script>
+fetch("http://localhost:5000/todos")
+.then(response => response.json())
+.then(data => {
+    let list=document.getElementById("todos");
+
+    data.forEach(todo=>{
+        let li=document.createElement("li");
+        li.innerHTML=todo.task;
+        list.appendChild(li);
+    });
+})
+.catch(()=>{
+    document.getElementById("todos").innerHTML=
+    "<li>Backend not reachable</li>";
+});
+</script>
+
+</body>
+</html>
